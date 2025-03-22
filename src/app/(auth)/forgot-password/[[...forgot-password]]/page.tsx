@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 
-const ForgetPasswordPage = () => {
+const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
@@ -155,4 +155,4 @@ const ForgetPasswordPage = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgotPasswordPage;
