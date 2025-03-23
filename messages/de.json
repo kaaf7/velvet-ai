@@ -1,0 +1,29 @@
+{
+  "common": {
+    "title": "Velvet KI",
+    "description": "Ihr KI-Assistent"
+  },
+  "chat": {
+    "title": "Chat",
+    "send": "Senden",
+    "message": "Nachricht",
+    "placeholder": "Schreiben Sie Ihre Nachricht hier..."
+  },
+  "navigation": {
+    "header": {
+      "new": "Neu",
+      "trending": "Im Trend",
+      "collections": "Kollektionen",
+      "brands": "Marken",
+      "seasonal": "Saisonal",
+      "signin": "Anmelden",
+      "signup": "Registrieren",
+      "signout": "Abmelden",
+      "forgotPassword": "Passwort vergessen",
+      "search": {
+        "placeholder": "Suche nach Artikeln, Marken...",
+        "close": "Schließen"
+      }
+    }
+  }
+}

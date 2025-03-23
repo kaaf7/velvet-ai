@@ -1,0 +1,29 @@
+{
+  "common": {
+    "title": "Velvet AI",
+    "description": "Your AI Assistant"
+  },
+  "chat": {
+    "title": "Chat",
+    "send": "Send",
+    "message": "Message",
+    "placeholder": "Type your message here..."
+  },
+  "navigation": {
+    "header": {
+      "new": "New",
+      "trending": "Trending",
+      "collections": "Collections",
+      "brands": "Brands",
+      "seasonal": "Seasonal",
+      "signin": "Log In",
+      "signup": "Sign up",
+      "signout": "Sign Out",
+      "forgotPassword": "Forgot Password",
+      "search": {
+        "placeholder": "Search for items, brands...",
+        "close": "Close"
+      }
+    }
+  }
+}
