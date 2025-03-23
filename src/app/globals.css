@@ -41,11 +41,61 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes rotate-border {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes border-rotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(1, 0, 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -58,7 +108,7 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent-foreground: oklch(0.82 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -76,6 +126,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  transition:
+    background-color 2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 1s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
@@ -92,7 +146,7 @@
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent-foreground: oklch(0.82 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
@@ -110,13 +164,91 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  transition:
+    background-color 2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 1s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    transition:
+      background-color 2s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 1s cubic-bezier(0.4, 0, 0.2, 1),
+      color 1s cubic-bezier(0.4, 0, 0.2, 1),
+      fill 1s cubic-bezier(0.4, 0, 0.2, 1),
+      stroke 1s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 1s cubic-bezier(0.22, 1, 0.36, 1);
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.rotating-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.rotating-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #ff4d4d, #ff8080, #ff4d4d);
+  background-size: 200% auto;
+  border-radius: 9999px;
+  z-index: -1;
+  animation:
+    rotate-border 3s linear infinite,
+    gradient-shift 6s ease infinite;
+  opacity: 0.2; /* Always slightly visible */
+  transition:
+    opacity 0.6s ease,
+    background-color 2s cubic-bezier(0.22, 1, 0.36, 1),
+    background-image 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rotating-border:hover::before {
+  opacity: 0.6;
+}
+
+.section-border-rotate {
+  position: relative;
+}
+
+.section-border-rotate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 0.35px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--accent) 50%,
+    var(--primary) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.3; /* Always slightly visible */
+  transition:
+    opacity 0.5s ease,
+    background 2s cubic-bezier(0.22, 1, 0.36, 1),
+    background-image 2s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 2s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: border-rotate 3s linear infinite;
+  pointer-events: none;
+}
+
+.section-border-rotate:hover::before {
+  opacity: 1;
 }
