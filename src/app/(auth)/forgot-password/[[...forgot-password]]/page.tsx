@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Card,
   CardContent,
@@ -69,7 +70,6 @@ const ForgotPasswordPage = () => {
         setSecondFactor(true);
         setError("");
       } else if (result?.status === "complete") {
-        //setActive({ session: result.createdSessionId });
         setError("");
       }
     } catch (err: any) {
