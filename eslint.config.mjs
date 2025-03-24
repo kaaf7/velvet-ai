@@ -17,7 +17,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-export default [
+const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   { ignores: ["dist"] },
   {
@@ -39,6 +39,8 @@ export default [
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      "@typescript-eslint/no-var-requires": "off",
+      "import/no-anonymous-default-export": "off",
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
@@ -53,5 +55,7 @@ export default [
       ],
       "prettier/prettier": "error",
     },
-  }
+  },
 ];
+
+export default eslintConfig;
